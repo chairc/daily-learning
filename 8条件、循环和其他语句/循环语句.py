@@ -21,9 +21,11 @@ print('********循环遍历字典********')
 tups = {'name': '小智', 'number': '1002'}
 for tup in tups:
     print(f'{tup}:{tups[tup]}')
+print('------')
 # 序列解包
 for key, value in tups.items():
     print(f'{key}:{value}')
+print('------')
 # 序列索引迭代
 tups2 = ['aaa', 'bbb', 'ccc']
 for i in range(len(tups2)):

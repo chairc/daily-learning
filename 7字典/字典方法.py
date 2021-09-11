@@ -23,8 +23,10 @@ print(c_copy['info2'])
 print('********fromkeys()********')
 seq = {'name', 'age', 'sex'}
 info1 = dict.fromkeys(seq)
+print('------')
 # 新字典输出，不带value
 print('%s' % info1)
+print('------')
 # 新字典输出，带value
 info2 = dict.fromkeys(seq, 10)
 print('%s' % info2)
@@ -32,10 +34,13 @@ print('%s' % info2)
 # get()：返回指定键的值，如果不在字典中，返回默认值
 print('********get()********')
 d = {'info1': ['小明', '1001', '男'], 'info2': ['小强', '1002', '女']}
+print('------')
 # get在字典中的值
 print(d.get('info1'))
+print('------')
 # get不在字典中的值，默认None
 print(d.get('info3'))
+print('------')
 # get不在字典中的值，自定义
 print(d.get('info3', '不在字典中'))
 
@@ -63,6 +68,7 @@ print('%s' % i.keys())
 print('********setdefault()********')
 j = {'小明': '1001', '小强': '1002', '小华': '1003'}
 print('%s' % j.setdefault('小华'))
+print('------')
 # 小峰不在字典中，添加小峰并设置默认值None
 print('%s' % j.setdefault('小峰'))
 print('%s' % j)
