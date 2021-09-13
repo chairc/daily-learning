@@ -48,6 +48,8 @@ student_public.show()
 print('------')
 student_private = StudentPrivateClass('小刚', 99)
 student_private.show()
+# 私有变量外部访问，原因是Python解释器吧私有变量__name变成了_StudentPrivateClass__name
+print(f'私有变量外部访问：{student_private._StudentPrivateClass__name}')
 # 需要用类中方法进行修改
 student_private.update_grade(100)
 student_private.show()
