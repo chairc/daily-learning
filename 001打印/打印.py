@@ -29,7 +29,7 @@ print(type(1.0))
 print(type('xxx'))
 
 # 输出到文件
-# fp = open("C:/Users/lenovo/Desktop/测试环境/python学习/1打印/print.txt", "a+")
+# fp = open("C:/Users/lenovo/Desktop/测试环境/python学习/001打印/print.txt", "a+")
 # print("这是一个测试打印!", file=fp)
 # fp.close()
 
