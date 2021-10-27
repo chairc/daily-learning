@@ -5,6 +5,14 @@ import torch
 
 # 索引分片操作
 
+print('********array0********')
+array0 = torch.arange(12).reshape((3, 4))
+print('当前array0 ->\n', array0)
+# 第一行开始到第二行全部列变为12
+array0[0:2, :] = 12
+print('变换后array0 ->\n', array0)
+
+print('********array1********')
 array1 = torch.randn(3, 4)
 print('当前array1 ->\n', array1)
 
