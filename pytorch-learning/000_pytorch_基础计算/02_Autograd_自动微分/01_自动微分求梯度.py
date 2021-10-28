@@ -47,6 +47,8 @@ print('********Tensor类中的detach()方法********')
 array5 = torch.randn(2, 3, requires_grad=True)
 # array5和array6数值相同，但array6不可导
 array6 = array5.detach()
+print('当前array5  ->\n', array5)
+print('当前array6  ->\n', array6)
 # 输出array6的requires_grad属性
 print('array6的requires_grad ->', array6.requires_grad)
 # 计算梯度时仅对可导的array5进行计算，array6不计算并输出None不作为显示
