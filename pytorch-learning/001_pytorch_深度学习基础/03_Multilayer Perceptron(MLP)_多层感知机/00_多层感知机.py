@@ -5,6 +5,19 @@ import torch
 import numpy as np
 import matplotlib.pylab as plt
 
+"""
+    激活函数：
+        1. ReLU函数
+        ReLU(x) = max(x,0)
+        输入为负时，ReLU函数的导数为0，而当输入为正时，ReLU函数的导数为1，当输入值精确等于0时，ReLU函数不可导
+        ReLU减轻了困扰以往神经网络的梯度消失问题
+        2. sigmoid函数
+        sigmoid(x) = 1/1+exp(−x)
+        将输出视作二分类问题的概率时，sigmoid仍然被广泛用作输出单元上的激活函数
+        3. tanh函数
+        tanh(x) = 1−exp(−2x)/1+exp(−2x)
+        当输入接近0时，tanh函数的导数接近最大值1。与我们在sigmoid函数图像中看到的类似，输入在任一方向上越远离0点，导数越接近0。
+"""
 
 def use_svg_display():
     # 该方法已弃用
