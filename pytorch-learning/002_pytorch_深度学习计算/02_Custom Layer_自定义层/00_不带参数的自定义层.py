@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import torch
 from torch import nn
+import torch.nn.functional as F
 
 # 不含模型参数的自定义层
 print('********不含模型参数的自定义层********')
@@ -22,9 +23,9 @@ centered_layer = CenteredLayer()
 print(centered_layer(torch.tensor([1, 2, 3, 4, 5], dtype=torch.float)))
 
 # 构造一个更复杂的模型
-net1 = nn.Sequential(nn.Linear(8, 128), CenteredLayer())
-print(f'net1 ->  \n{net1}')
+net = nn.Sequential(nn.Linear(8, 128), CenteredLayer())
+print(f'net1 ->  \n{net}')
 
-y = net1(torch.rand(4, 8))
+y = net(torch.rand(4, 8))
 print(f'y.shape    ->  {y.shape}')
 print(f'y.mean().item() ->  {y.mean().item()}')
