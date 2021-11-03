@@ -8,6 +8,12 @@ import matplotlib_inline.backend_inline
 import matplotlib.pyplot as plt
 import sys
 
+"""
+    丢弃法将一些输出项随机置0来控制模型复杂度
+    常作用在多层感知机的隐藏层输出上
+    丢弃概率是控制模型复杂度的超参数（一般取值0.1、0.5、0.9）
+
+"""
 
 # 该函数以drop_prob的概率丢弃X中的元素
 def dropout(X, drop_prob):

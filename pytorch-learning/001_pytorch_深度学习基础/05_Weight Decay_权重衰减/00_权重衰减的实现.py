@@ -7,6 +7,11 @@ import matplotlib_inline.backend_inline
 import matplotlib.pyplot as plt
 import sys
 
+"""
+    权重衰退是一种处理过拟合的方法
+    L2 正则化公式直接在原来的损失函数基础上加上权重参数的平方和
+"""
+
 n_train, n_test, num_inputs = 20, 100, 200
 true_w, true_b = torch.ones(num_inputs, 1) * 0.01, 0.05
 

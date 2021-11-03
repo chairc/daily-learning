@@ -4,6 +4,17 @@ import torch
 import matplotlib_inline.backend_inline
 import matplotlib.pyplot as plt
 
+"""
+    梯度值变成0
+        对16位浮点数尤为严重
+    训练没有进展
+        不管如何选择学习率
+    对于底部层尤为严重
+        仅仅顶部层训练的较好
+        无法让神经网络更深
+
+"""
+
 
 def use_svg_display():
     """使用 svg 格式显示绘图"""

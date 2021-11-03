@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pylab as plt
 
 """
+    多层感知机十分适合处理表格数据
     激活函数：
         1. ReLU函数
         ReLU(x) = max(x,0)
