@@ -4,7 +4,7 @@ import torch
 import matplotlib.pyplot as plt
 import matplotlib_inline.backend_inline
 import torch.nn as nn
-import d2lzh_pytorch.torch as d2l
+import d2lzh_pytorch.torch_d2l as d2l
 
 dropout1, dropout2 = 0.2, 0.5
 num_epochs, lr, batch_size = 10, 0.5, 256
