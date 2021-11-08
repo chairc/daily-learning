@@ -7,7 +7,7 @@ from torch import nn
     步幅是指行/列滑动的步长，可以成倍减少输出形状
     Nh为输入的行高，Nw为输入的列宽，Kh为卷积核的行高，Kw为卷积核的列宽，Pw为填充的行数，Ph为填充的列数
     ⌊⌋表示向下取整
-    给定高度Sh,和宽度Sw的步幅，输出形状是
+    给定步幅高度Sh,和宽度Sw的步幅，输出形状是
     ⌊(Nh - Kh+ Ph +Sh) / Sh⌋ * ⌊(Nw - Kw + Pw+ Sw) / Sw⌋
     如果Ph = Kh-1，Pw= Kw - 1
     ⌊(Nh + Sh - 1)/s⌋ * ⌊(Nw + Sw - 1)/Sw⌋
