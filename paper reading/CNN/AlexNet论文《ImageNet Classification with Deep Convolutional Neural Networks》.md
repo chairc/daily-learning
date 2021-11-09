@@ -55,7 +55,7 @@ compared to 26.2% achieved by the second-best entry.
 
 ### 3.1 ReLU Nonlinearity
 
-![ReLU vs tanh](./img/ImageNet Classification with Deep Convolutional Neural Networks/ReLU vs tanh.png)
+![ReLU vs tanh](./pic/ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/ReLU-vs-tanh.png)
 
 在`ReLU Nonlinearity`这个章节里，主要就是说ReLu函数比传统的那些tanh、sigmoid函数要好，在CNN
 中有更快的表现。图中的实线代表ReLU，虚线代表tanh
@@ -75,7 +75,7 @@ compared to 26.2% achieved by the second-best entry.
 
 ### 3.5 Overall Architecture
 
-![Overall Architecture](./img/ImageNet Classification with Deep Convolutional Neural Networks/Overall Architecture.png)
+![Overall Architecture](./pic/ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/Overall-Architecture.png)
 
 在`Overall Architecture`这个章节里，**第一段**讲了AlexNet这个模型的结构是有八个含有权重的层，
 由五层卷积层和三层全连接层构成。**第二段**讲了卷积核、卷积层、池化层和全连接层的关系。**第三段**讲
