@@ -512,8 +512,8 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
                              (train_l, train_acc, None))
         test_acc = evaluate_accuracy_gpu(net, test_iter)
         animator.add(epoch + 1, (None, None, test_acc))
-    print(f'loss {train_l:.3f}, train acc {train_acc:.3f}, '
-          f'test acc {test_acc:.3f}')
+        print(f'num  ->  {epoch + 1},loss  ->  {train_l:.3f}, train acc  ->  {train_acc:.3f}, '
+          f'test acc  ->  {test_acc:.3f}')
     print(f'{metric[2] * num_epochs / timer.sum():.1f} examples/sec '
           f'on {str(device)}')
 
