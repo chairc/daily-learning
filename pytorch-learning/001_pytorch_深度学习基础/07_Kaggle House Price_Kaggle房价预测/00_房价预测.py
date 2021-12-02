@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 # 获取数据集
 print('********获取数据集********')
-root = 'C:/Users/lenovo/Desktop/Testing environment/pytorch learning/Datasets/data'
+root = 'C:/Users/lenovo/Desktop/Testing environment/pytorch learning/Datasets/data/kaggle_house_pred'
 print(f'pytorch version ->  {torch.__version__}')
 torch.set_default_tensor_type(torch.FloatTensor)
 
