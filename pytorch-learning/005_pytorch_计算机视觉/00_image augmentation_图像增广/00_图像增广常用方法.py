@@ -8,7 +8,7 @@ from d2lzh_pytorch import torch_d2l as d2l
 """
     数据增强通过变形数据来获取多样性从而使得模型泛化更好
 """
-root = 'C:/Users/lenovo/Desktop/Testing environment/pytorch learning/Datasets/img'
+root = '../../Datasets/img'
 
 d2l.set_figsize()
 img = d2l.Image.open(f'{root}/cat1.jpg')
