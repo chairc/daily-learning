@@ -96,7 +96,7 @@ void QuickMethod::PixelVisit(Mat& image) {
 
 void QuickMethod::Operators(Mat& image) {
 	// 正常加减乘除法
-	Mat dst_1,dst_2,dst_3,dst_4;
+	Mat dst_1, dst_2, dst_3, dst_4;
 	dst_1 = image + Scalar(20, 20, 20);
 	namedWindow("加法操作", WINDOW_FREERATIO);
 	imshow("加法操作", dst_1);
@@ -156,14 +156,129 @@ static void OnContrast(int contrast, void* user_data) {
 	Mat dst_on_track = Mat::zeros(image.size(), image.type());
 	Mat mat_on_track = Mat::zeros(image.size(), image.type());
 	double temp = contrast / 200.0;
-	addWeighted(image, temp,mat_on_track,0.0,0.0,dst_on_track);
+	addWeighted(image, temp, mat_on_track, 0.0, 0.0, dst_on_track);
 	imshow("亮度与对比度调整", dst_on_track);
 }
 
 void QuickMethod::TrackingBar(Mat& image) {
 	namedWindow("亮度与对比度调整", WINDOW_FREERATIO);
-	int light_max_value = 100, lightness = 50,contrast_value = 100;
+	int light_max_value = 100, lightness = 50, contrast_value = 100;
 	createTrackbar("Value Bar", "亮度与对比度调整", &lightness, light_max_value, OnLightness, (void*)(&image));
 	createTrackbar("Contrast Bar", "亮度与对比度调整", &contrast_value, 200, OnContrast, (void*)(&image));
 	OnLightness(50, &image);
+}
+
+void QuickMethod::Key(Mat& image) {
+	Mat dst = Mat::zeros(image.size(), image.type());
+	namedWindow("键盘响应", WINDOW_FREERATIO);
+	// 不断循环，监听键盘操作
+	while (true) {
+		int c = waitKey(100);
+		// cout << "ascii: " << c << endl;
+		// 按ESC退出
+		if (c == 27) {
+			break;
+		}
+		if (c == 49) {
+			cout << "this key is: 1" << endl;
+			cvtColor(image, dst, COLOR_BGR2GRAY);
+		}
+		if (c == 50) {
+			cout << "this key is: 2" << endl;
+			cvtColor(image, dst, COLOR_BGR2HSV);
+		}
+		if (c == 51) {
+			cout << "this key is: 3" << endl;
+			dst = Scalar(50, 50, 50);
+			add(image, dst, dst);
+		}
+		imshow("键盘响应", dst);
+	}
+}
+
+void QuickMethod::ColorStyle(Mat& image) {
+	int color_map[] = {
+		COLORMAP_AUTUMN,
+		COLORMAP_BONE,
+		COLORMAP_CIVIDIS,
+		COLORMAP_COOL,
+		COLORMAP_DEEPGREEN,
+		COLORMAP_HOT,
+		COLORMAP_HSV,
+		COLORMAP_INFERNO,
+		COLORMAP_JET,
+		COLORMAP_MAGMA,
+		COLORMAP_OCEAN,
+		COLORMAP_PARULA,
+		COLORMAP_PINK,
+		COLORMAP_PLASMA,
+		COLORMAP_RAINBOW,
+		COLORMAP_SPRING,
+		COLORMAP_SUMMER,
+		COLORMAP_TURBO,
+		COLORMAP_TWILIGHT,
+		COLORMAP_TWILIGHT_SHIFTED,
+		COLORMAP_VIRIDIS,
+		COLORMAP_WINTER
+	};
+
+	Mat dst;
+	int i = 0;
+	while (true) {
+		int c = waitKey(1000);
+		// 按ESC退出
+		if (c == 27) {
+			break;
+		}
+		applyColorMap(image, dst, color_map[i]);
+		if (i == 21) {
+			i = 0;
+		} else {
+			i++;
+		}
+		namedWindow("图片颜色样式循环", WINDOW_FREERATIO);
+		imshow("图片颜色样式循环", dst);
+	}
+}
+
+void QuickMethod::Bitwise(Mat& image) {
+	Mat dst_1, dst_2, dst_3, dst_4;
+	// 创建两个三通道矩阵
+	Mat mat_1 = Mat::zeros(Size(256, 256), CV_8UC3);
+	Mat mat_2 = Mat::zeros(Size(256, 256), CV_8UC3);
+	Mat mat_3 = Mat::zeros(Size(256, 256), CV_8UC3);
+	Mat mat_4 = Mat::zeros(Size(256, 256), CV_8UC3);
+	Mat mat_5 = Mat::zeros(Size(256, 256), CV_8UC3);
+	Mat mat_6 = Mat::zeros(Size(256, 256), CV_8UC3);
+	Mat mat_7 = Mat::zeros(Size(256, 256), CV_8UC3);
+	Mat mat_8 = Mat::zeros(Size(256, 256), CV_8UC3);
+	// 给mat_1矩阵设置x,y和大小与颜色，thickness线宽（-1表示填充矩形，大于0表示绘制）
+	rectangle(mat_1, Rect(100, 100, 50, 50), Scalar(255, 255, 0), -1, LINE_8, 0);
+	rectangle(mat_2, Rect(130, 130, 50, 50), Scalar(0, 255, 255), -1, LINE_8, 0);
+	rectangle(mat_3, Rect(100, 100, 50, 50), Scalar(255, 255, 0), -1, LINE_8, 0);
+	rectangle(mat_4, Rect(130, 130, 50, 50), Scalar(0, 255, 255), -1, LINE_8, 0);
+	rectangle(mat_5, Rect(100, 100, 50, 50), Scalar(255, 255, 0), -1, LINE_8, 0);
+	rectangle(mat_6, Rect(130, 130, 50, 50), Scalar(0, 255, 255), -1, LINE_8, 0);
+	// imshow("显示mat_1", mat_1);
+	// imshow("显示mat_2", mat_2);
+
+	// 位与操作
+	bitwise_and(mat_1, mat_2, dst_1);
+	imshow("像素位操作（and）", dst_1);
+
+	// 位或操作
+	bitwise_or(mat_3, mat_4, dst_2);
+	imshow("像素位操作（or）", dst_2);
+
+	// 位非操作
+	bitwise_not(image,dst_3);
+	// ~image取反
+	// dst_3 = ~image;
+	namedWindow("像素位操作（not）", WINDOW_FREERATIO);
+	imshow("像素位操作（not）", dst_3);
+
+	// 位异或操作
+	bitwise_xor(mat_5, mat_6, dst_4);
+	imshow("像素位操作（xor）", dst_4);
+
 }

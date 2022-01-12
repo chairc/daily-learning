@@ -38,7 +38,19 @@ int main() {
 				// 滚动条亮度显示
 				image.ImageTrackingBar();
 				break;
-			case 11:
+			case 7:
+				// 键盘交互显示
+				image.ImageKey();
+				break;
+			case 8:
+				// 图片颜色样式显示
+				image.ImageColorStyle();
+				break;
+			case 9:
+				// 图片像素逻辑关系
+				image.ImageBitwise();
+				break;
+			case 99:
 				cout << "input camera code(default is 0):";
 				cin >> camera_code;
 				camera.OpenCamera(camera_code);

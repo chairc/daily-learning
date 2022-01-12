@@ -9,4 +9,7 @@ public:
 	void ImagePixelVisit();
 	void ImageOperator();
 	void ImageTrackingBar();
+	void ImageKey();
+	void ImageColorStyle();
+	void ImageBitwise();
 };

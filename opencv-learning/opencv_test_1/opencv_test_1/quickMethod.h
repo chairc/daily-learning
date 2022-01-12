@@ -14,4 +14,7 @@ public:
 	void PixelVisit(Mat& image);
 	void Operators(Mat& image);
 	void TrackingBar(Mat& image);
+	void Key(Mat& image);
+	void ColorStyle(Mat& image);
+	void Bitwise(Mat& image);
 };

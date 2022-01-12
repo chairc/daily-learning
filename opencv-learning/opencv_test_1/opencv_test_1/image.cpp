@@ -114,3 +114,56 @@ void Image::ImageTrackingBar() {
 		cout << "error" << endl;
 	}
 }
+
+
+void Image::ImageKey() {
+	try {
+		Mat image_mat;
+		QuickMethod qd;
+		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
+		if (image_mat.empty()) {
+			cout << "image is empty..." << endl;
+		}
+		namedWindow("打开图片", WINDOW_FREERATIO);
+		imshow("打开图片", image_mat);
+		qd.Key(image_mat);
+		waitKey(0);
+	} catch (const std::exception&) {
+		cout << "error" << endl;
+	}
+}
+
+void Image::ImageColorStyle() {
+	try {
+		Mat image_mat;
+		QuickMethod qd;
+		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
+		if (image_mat.empty()) {
+			cout << "image is empty..." << endl;
+		}
+		namedWindow("打开图片", WINDOW_FREERATIO);
+		imshow("打开图片", image_mat);
+		qd.ColorStyle(image_mat);
+		waitKey(0);
+	} catch (const std::exception&) {
+		cout << "error" << endl;
+	}
+}
+
+void Image::ImageBitwise() {
+	try {
+		Mat image_mat;
+		QuickMethod qd;
+		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
+		if (image_mat.empty()) {
+			cout << "image is empty..." << endl;
+		}
+		namedWindow("打开图片", WINDOW_FREERATIO);
+		imshow("打开图片", image_mat);
+		qd.Bitwise(image_mat);
+		waitKey(0);
+	} catch (const std::exception&) {
+		cout << "error" << endl;
+	}
+}
+
