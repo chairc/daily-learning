@@ -10,6 +10,19 @@ int main() {
 	int camera_code, image_type, switch_num, flag = 1;
 	string;
 	while (flag == 1) {
+		cout << "select your test.\n\
+	1.  open image test\n\
+	2.  image color space test\n\
+	3.  image matrix creation test\n\
+	4.  image pixel visit test\n\
+	5.  image operator test\n\
+	6.  image tracking bar test\n\
+	7.  image key test\n\
+	8.  image color style test\n\
+	9.  image bitwise test\n\
+	10. image channels test \n\
+	11. image inrange test \n\
+	12. image pixel statistic test"<< endl;
 		cout << "input switch number:";
 		cin >> switch_num;
 		switch (switch_num) {
@@ -49,6 +62,18 @@ int main() {
 			case 9:
 				// 图片像素逻辑关系
 				image.ImageBitwise();
+				break;
+			case 10:
+				// 通道分离与合并
+				image.ImageChannels();
+				break;
+			case 11:
+				// 图像色彩空间转换
+				image.ImageInRange();
+				break;
+			case 12:
+				// 图像像素值统计
+				image.ImagePixelStatistic();
 				break;
 			case 99:
 				cout << "input camera code(default is 0):";

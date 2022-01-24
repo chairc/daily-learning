@@ -1,5 +1,6 @@
 #include "quickMethod.h"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -271,7 +272,7 @@ void QuickMethod::Bitwise(Mat& image) {
 	imshow("像素位操作（or）", dst_2);
 
 	// 位非操作
-	bitwise_not(image,dst_3);
+	bitwise_not(image, dst_3);
 	// ~image取反
 	// dst_3 = ~image;
 	namedWindow("像素位操作（not）", WINDOW_FREERATIO);
@@ -281,4 +282,81 @@ void QuickMethod::Bitwise(Mat& image) {
 	bitwise_xor(mat_5, mat_6, dst_4);
 	imshow("像素位操作（xor）", dst_4);
 
+}
+
+void QuickMethod::Channels(Mat& image) {
+	
+	vector<Mat> mat_vector;
+	split(image, mat_vector);
+	namedWindow("通道显示-蓝色", WINDOW_FREERATIO);
+	namedWindow("通道显示-绿色", WINDOW_FREERATIO);
+	namedWindow("通道显示-红色", WINDOW_FREERATIO);
+	namedWindow("重设通道显示-蓝色", WINDOW_FREERATIO);
+	namedWindow("重设通道显示-绿色", WINDOW_FREERATIO);
+	namedWindow("重设通道显示-红色", WINDOW_FREERATIO);
+	// 显示三通道中没一个通道
+	imshow("通道显示-蓝色", mat_vector[0]);
+	imshow("通道显示-绿色", mat_vector[1]);
+	imshow("通道显示-红色", mat_vector[2]);
+
+	Mat dst_r, dst_g, dst_b, dst = Mat::zeros(image.size(), image.type());
+
+	mat_vector[1] = 0;
+	mat_vector[2] = 0;
+	merge(mat_vector, dst_b);
+	imshow("重设通道显示-蓝色", dst_b);
+
+	// 合并之后需要重新拆分原始图像，不然会拆分上一个合并的图片，最终会导致通道全为0
+	split(image, mat_vector);
+	mat_vector[0] = 0;
+	mat_vector[2] = 0;
+	merge(mat_vector, dst_g);
+	imshow("重设通道显示-绿色", dst_g);
+
+	split(image, mat_vector);
+	mat_vector[0] = 0;
+	mat_vector[1] = 0;
+	merge(mat_vector, dst_r);
+	imshow("重设通道显示-红色", dst_r);
+
+	// 混合通道
+	int from_to[] = { 0,2,1,1,2,0 };
+	// 参数：（输入矩阵可以为一个或多个，输入矩阵的个数，输出矩阵可以为一个或多个，
+	// 输出矩阵个数，设置输入矩阵的通道对应输出矩阵的通道，参数fromTo中的有几组输入输出通道关系）
+	mixChannels(&image, 1, &dst, 1, from_to, 3);
+	namedWindow("通道混合", WINDOW_FREERATIO);
+	imshow("通道混合", dst);
+}
+
+void QuickMethod::Inrange(Mat& image) {
+	Mat hsv,mask;
+	cvtColor(image, hsv, COLOR_BGR2HSV);
+	inRange(hsv, Scalar(35,43,46), Scalar(77,255,255), mask);
+	namedWindow("图像色彩空间转换", WINDOW_FREERATIO);
+	imshow("图像色彩空间转换", mask);
+
+	Mat red_background = Mat::zeros(image.size(), image.type());
+	red_background = Scalar(40, 40, 220);
+	bitwise_not(mask, mask);
+	image.copyTo(red_background, mask);
+	namedWindow("抠图填充", WINDOW_FREERATIO);
+	imshow("抠图填充", red_background);
+}
+
+void QuickMethod::PixelStatistic(Mat& image) {
+	Mat mean, std_dev;
+	vector<Mat> mv;
+	split(image,mv);
+	double min, max;
+	Point min_loc, max_loc;
+	for (int i = 0; i < mv.size(); i++) {
+		minMaxLoc(mv[i], &min, &max, &min_loc, &max_loc, Mat());
+		cout <<"channel: "<< i << " min value: " << min << ", max value: " << max << endl;
+	}
+	// cout << "min location: " << min_loc << ", max location: " << max_loc << endl;
+	for (int i = 0; i < mv.size(); i++) {
+		meanStdDev(mv[i], mean, std_dev);
+		cout << "channel: " << i << endl << "mean value: " << endl << mean << endl << "std value: " << endl << std_dev << endl;
+	}
+	
 }

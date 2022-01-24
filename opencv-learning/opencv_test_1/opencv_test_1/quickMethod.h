@@ -17,4 +17,7 @@ public:
 	void Key(Mat& image);
 	void ColorStyle(Mat& image);
 	void Bitwise(Mat& image);
+	void Channels(Mat& image);
+	void Inrange(Mat& image);
+	void PixelStatistic(Mat& image);
 };

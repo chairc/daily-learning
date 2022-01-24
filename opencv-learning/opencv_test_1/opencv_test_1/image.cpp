@@ -6,6 +6,73 @@
 using namespace std;
 using namespace cv;
 
+static void ImageCommonMethod(enum MethodEnum me) {
+	try {
+		Mat image_mat;
+		QuickMethod qd;
+		//image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
+		image_mat = imread("C:/Users/lenovo/Desktop/1.jpg");
+		if (image_mat.empty()) {
+			cout << "image is empty..." << endl;
+		}
+		namedWindow("打开图片", WINDOW_FREERATIO);
+		imshow("打开图片", image_mat);
+		switch (me) {
+			// 色彩空间转换
+			case ImageColorSpace:
+				qd.ColorSpace(image_mat);
+				break;
+			// 矩阵生成
+			case ImageMatrixCreation:
+				// qd.MatrixCreation(image_mat);
+				qd.MatrixCreation();
+				break;
+			// 像素访问
+			case ImagePixelVisit:
+				qd.PixelVisit(image_mat);
+				break;
+			// 操作数
+			case ImageOperator:
+				qd.Operators(image_mat);
+				break;
+			// 滚动条亮度显示
+			case ImageTrackingBar:
+				qd.Operators(image_mat);
+				break;
+			// 键盘交互显示
+			case ImageKey:
+				qd.Key(image_mat);
+				break;
+			// 图片颜色样式显示
+			case ImageColorStyle:
+				qd.ColorStyle(image_mat);
+				break;
+			// 图片像素逻辑关系
+			case ImageBitwise:
+				qd.Bitwise(image_mat);
+				break;
+			// 通道分离与合并
+			case ImageChannels:
+				qd.Channels(image_mat);
+				break;
+			// 图像色彩空间转换
+			case ImageInRange:
+				qd.Inrange(image_mat);
+				break;
+			// 图像像素值统计
+			case ImagePixelStatistic:
+				qd.PixelStatistic(image_mat);
+				break;
+
+			default:
+				break;
+		}
+		waitKey(0);
+	} catch (const std::exception& e) {
+		cout << e.what() << endl;
+	}
+}
+
 void Image::OpenImage(int image_type) {
 	try {
 		Mat image_mat;
@@ -28,142 +95,47 @@ void Image::OpenImage(int image_type) {
 }
 
 void Image::ImageColorSpace() {
-	try {
-		Mat image_mat;
-		QuickMethod qd;
-		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		if (image_mat.empty()) {
-			cout << "image is empty..." << endl;
-		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
-		// 色彩空间转换
-		qd.ColorSpace(image_mat);
-		waitKey(0);
-	} catch (const std::exception&) {
-		cout << "error" << endl;
-	}
+	ImageCommonMethod(MethodEnum(0));
 }
 
 void Image::ImageMatrixCreation() {
-	try {
-		Mat image_mat;
-		QuickMethod qd;
-		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		if (image_mat.empty()) {
-			cout << "image is empty..." << endl;
-		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
-		// 色彩空间转换
-		// qd.MatrixCreation(image_mat);
-		qd.MatrixCreation();
-		waitKey(0);
-	} catch (const std::exception&) {
-		cout << "error" << endl;
-	}
+	ImageCommonMethod(MethodEnum(1));
 }
 
 void Image::ImagePixelVisit() {
-	try {
-		Mat image_mat;
-		QuickMethod qd;
-		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		if (image_mat.empty()) {
-			cout << "image is empty..." << endl;
-		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
-		qd.PixelVisit(image_mat);
-		waitKey(0);
-	} catch (const std::exception&) {
-		cout << "error" << endl;
-	}
+	ImageCommonMethod(MethodEnum(2));
 }
 
 void Image::ImageOperator() {
-	try {
-		Mat image_mat;
-		QuickMethod qd;
-		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		if (image_mat.empty()) {
-			cout << "image is empty..." << endl;
-		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
-		qd.Operators(image_mat);
-		waitKey(0);
-	} catch (const std::exception&) {
-		cout << "error" << endl;
-	}
+	ImageCommonMethod(MethodEnum(3));
 }
 
 void Image::ImageTrackingBar() {
-	try {
-		Mat image_mat;
-		QuickMethod qd;
-		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		if (image_mat.empty()) {
-			cout << "image is empty..." << endl;
-		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
-		qd.TrackingBar(image_mat);
-		waitKey(0);
-	} catch (const std::exception&) {
-		cout << "error" << endl;
-	}
+	ImageCommonMethod(MethodEnum(4));
 }
 
 
 void Image::ImageKey() {
-	try {
-		Mat image_mat;
-		QuickMethod qd;
-		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		if (image_mat.empty()) {
-			cout << "image is empty..." << endl;
-		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
-		qd.Key(image_mat);
-		waitKey(0);
-	} catch (const std::exception&) {
-		cout << "error" << endl;
-	}
+	ImageCommonMethod(MethodEnum(5));
 }
 
 void Image::ImageColorStyle() {
-	try {
-		Mat image_mat;
-		QuickMethod qd;
-		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		if (image_mat.empty()) {
-			cout << "image is empty..." << endl;
-		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
-		qd.ColorStyle(image_mat);
-		waitKey(0);
-	} catch (const std::exception&) {
-		cout << "error" << endl;
-	}
+	ImageCommonMethod(MethodEnum(6));
 }
 
 void Image::ImageBitwise() {
-	try {
-		Mat image_mat;
-		QuickMethod qd;
-		image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		if (image_mat.empty()) {
-			cout << "image is empty..." << endl;
-		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
-		qd.Bitwise(image_mat);
-		waitKey(0);
-	} catch (const std::exception&) {
-		cout << "error" << endl;
-	}
+	ImageCommonMethod(MethodEnum(7));
+}
+
+void Image::ImageChannels() {
+	ImageCommonMethod(MethodEnum(8));
+}
+
+void Image::ImageInRange() {
+	ImageCommonMethod(MethodEnum(9));
+}
+
+void Image::ImagePixelStatistic() {
+	ImageCommonMethod(MethodEnum(10));
 }
 

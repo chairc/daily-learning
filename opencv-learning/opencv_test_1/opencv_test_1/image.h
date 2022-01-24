@@ -1,4 +1,21 @@
 #pragma once
+
+enum MethodEnum {
+	ImageColorSpace,
+	ImageMatrixCreation,
+	ImagePixelVisit,
+	ImageOperator,
+	ImageTrackingBar,
+	ImageKey,
+	ImageColorStyle,
+	ImageBitwise,
+	ImageChannels,
+	ImageInRange,
+	ImagePixelStatistic,
+};
+
+static void ImageCommonMethod(MethodEnum type);
+
 class Image {
 private:
 
@@ -12,4 +29,7 @@ public:
 	void ImageKey();
 	void ImageColorStyle();
 	void ImageBitwise();
+	void ImageChannels();
+	void ImageInRange();
+	void ImagePixelStatistic();
 };
