@@ -360,3 +360,39 @@ void QuickMethod::PixelStatistic(Mat& image) {
 	}
 	
 }
+
+void QuickMethod::Drawing(Mat& image) {
+	Rect rect;
+	rect.x = 300;
+	rect.y = 300;
+	rect.width = 500;
+	rect.height = 500;
+	// 绘制矩形
+	// -1代表填充，大于0代表边框粗细
+	rectangle(image, rect, Scalar(0, 0, 255), 2, 8, 0);
+	// 绘制圆
+	circle(image, Point(100, 100), 50, Scalar(0, 255, 255), -1, 8, 0);
+	// 绘制线
+	line(image, Point(400, 100), Point(500, 200), Scalar(0, 255, 0), 2, 8, 0);
+	// 绘制椭圆
+	RotatedRect rotate_rect;
+	rotate_rect.center = Point(900, 900);
+	rotate_rect.size = Size(500, 100);
+	// 椭圆的旋转角度
+	rotate_rect.angle = 0.0;
+	ellipse(image, rotate_rect, Scalar(255, 255, 255), 2, 8);
+	namedWindow("绘制演示", WINDOW_FREERATIO);
+	imshow("绘制演示", image);
+
+	// 绘制一个叠底效果
+	Mat dst;
+	Mat background = Mat::zeros(image.size(), image.type());
+	rectangle(background, rect, Scalar(0, 0, 255), -1, 8, 0);
+	circle(background, Point(100, 100), 50, Scalar(0, 255, 255), -1, 8, 0);
+	line(background, Point(400, 100), Point(500, 200), Scalar(0, 255, 0), 2, 8, 0);
+	// 增加权重，（图1，图1的权重，图2，图2的权重，权重和添加的值为3，输出图片src）
+	addWeighted(image, 0.7, background, 0.3, 0, dst);
+	namedWindow("叠底效果", WINDOW_FREERATIO);
+	imshow("叠底效果", dst);
+
+}

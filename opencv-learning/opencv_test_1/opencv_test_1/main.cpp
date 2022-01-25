@@ -22,7 +22,8 @@ int main() {
 	9.  image bitwise test\n\
 	10. image channels test \n\
 	11. image inrange test \n\
-	12. image pixel statistic test"<< endl;
+	12. image pixel statistic test \n\
+	13. image drawing test"<< endl;
 		cout << "input switch number:";
 		cin >> switch_num;
 		switch (switch_num) {
@@ -74,6 +75,10 @@ int main() {
 			case 12:
 				// 图像像素值统计
 				image.ImagePixelStatistic();
+				break;
+			case 13:
+				// 几何形状绘制
+				image.ImageDrawing();
 				break;
 			case 99:
 				cout << "input camera code(default is 0):";

@@ -6,12 +6,18 @@
 using namespace std;
 using namespace cv;
 
-static void ImageCommonMethod(enum MethodEnum me) {
+static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 	try {
 		Mat image_mat;
 		QuickMethod qd;
-		//image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
-		image_mat = imread("C:/Users/lenovo/Desktop/1.jpg");
+		if (image_num == 0) {
+			// ÈıÉ«µÍÏñËØÍ¼Æ¬15x20
+			image_mat = imread("C:/Users/lenovo/Desktop/1.jpg");
+		} else {
+			// ¸ßÏñËØÍ¼Æ¬
+			image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
+		}
+		
 		if (image_mat.empty()) {
 			cout << "image is empty..." << endl;
 		}
@@ -63,7 +69,10 @@ static void ImageCommonMethod(enum MethodEnum me) {
 			case ImagePixelStatistic:
 				qd.PixelStatistic(image_mat);
 				break;
-
+			// ¼¸ºÎÍ¼Ïñ»æÖÆ
+			case ImageDrawing:
+				qd.Drawing(image_mat);
+				break;
 			default:
 				break;
 		}
@@ -95,47 +104,51 @@ void Image::OpenImage(int image_type) {
 }
 
 void Image::ImageColorSpace() {
-	ImageCommonMethod(MethodEnum(0));
+	ImageCommonMethod(MethodEnum(0), 0);
 }
 
 void Image::ImageMatrixCreation() {
-	ImageCommonMethod(MethodEnum(1));
+	ImageCommonMethod(MethodEnum(1), 0);
 }
 
 void Image::ImagePixelVisit() {
-	ImageCommonMethod(MethodEnum(2));
+	ImageCommonMethod(MethodEnum(2), 0);
 }
 
 void Image::ImageOperator() {
-	ImageCommonMethod(MethodEnum(3));
+	ImageCommonMethod(MethodEnum(3), 0);
 }
 
 void Image::ImageTrackingBar() {
-	ImageCommonMethod(MethodEnum(4));
+	ImageCommonMethod(MethodEnum(4), 0);
 }
 
 
 void Image::ImageKey() {
-	ImageCommonMethod(MethodEnum(5));
+	ImageCommonMethod(MethodEnum(5), 0);
 }
 
 void Image::ImageColorStyle() {
-	ImageCommonMethod(MethodEnum(6));
+	ImageCommonMethod(MethodEnum(6), 0);
 }
 
 void Image::ImageBitwise() {
-	ImageCommonMethod(MethodEnum(7));
+	ImageCommonMethod(MethodEnum(7), 0);
 }
 
 void Image::ImageChannels() {
-	ImageCommonMethod(MethodEnum(8));
+	ImageCommonMethod(MethodEnum(8), 0);
 }
 
 void Image::ImageInRange() {
-	ImageCommonMethod(MethodEnum(9));
+	ImageCommonMethod(MethodEnum(9), 0);
 }
 
 void Image::ImagePixelStatistic() {
-	ImageCommonMethod(MethodEnum(10));
+	ImageCommonMethod(MethodEnum(10), 0);
+}
+
+void Image::ImageDrawing() {
+	ImageCommonMethod(MethodEnum(11), 1);
 }
 

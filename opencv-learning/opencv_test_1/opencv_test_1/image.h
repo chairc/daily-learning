@@ -12,6 +12,7 @@ enum MethodEnum {
 	ImageChannels,
 	ImageInRange,
 	ImagePixelStatistic,
+	ImageDrawing,
 };
 
 static void ImageCommonMethod(MethodEnum type);
@@ -32,4 +33,5 @@ public:
 	void ImageChannels();
 	void ImageInRange();
 	void ImagePixelStatistic();
+	void ImageDrawing();
 };

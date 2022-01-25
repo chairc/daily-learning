@@ -20,4 +20,5 @@ public:
 	void Channels(Mat& image);
 	void Inrange(Mat& image);
 	void PixelStatistic(Mat& image);
+	void Drawing(Mat& image);
 };
