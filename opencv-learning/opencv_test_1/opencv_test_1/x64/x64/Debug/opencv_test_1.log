@@ -1,0 +1,4 @@
+﻿  quickMethod.cpp
+F:\program\opencv-learning\opencv_test_1\opencv_test_1\quickMethod.cpp(460,14): warning C4101: “temp_x”: 未引用的局部变量
+F:\program\opencv-learning\opencv_test_1\opencv_test_1\quickMethod.cpp(460,22): warning C4101: “temp_y”: 未引用的局部变量
+  opencv_test_1.vcxproj -> F:\program\opencv-learning\opencv_test_1\x64\Debug\opencv_test_1.exe
