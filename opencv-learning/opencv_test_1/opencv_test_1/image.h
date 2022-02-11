@@ -13,6 +13,11 @@ enum MethodEnum {
 	ImageInRange,
 	ImagePixelStatistic,
 	ImageDrawing,
+	ImageRandomDrawing,
+	ImagePolylineDrawing,
+	ImageMouseDrawing,
+	ImageNorm,
+	ImageResize,
 };
 
 static void ImageCommonMethod(MethodEnum type);
@@ -34,4 +39,9 @@ public:
 	void ImageInRange();
 	void ImagePixelStatistic();
 	void ImageDrawing();
+	void ImageRandomDrawing();
+	void ImagePolylineDrawing();
+	void ImageMouseDrawing();
+	void ImageNorm();
+	void ImageResize();
 };

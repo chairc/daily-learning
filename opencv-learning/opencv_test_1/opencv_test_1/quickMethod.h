@@ -1,5 +1,6 @@
 #pragma once
 #include <opencv2/opencv.hpp>
+#include <Windows.h>
 
 using namespace cv;
 
@@ -21,4 +22,9 @@ public:
 	void Inrange(Mat& image);
 	void PixelStatistic(Mat& image);
 	void Drawing(Mat& image);
+	void RandomDrawing();
+	void PolylineDrawing();
+	void MouseDrawing(Mat& image);
+	void Norm(Mat& image);
+	void Resize(Mat& image);
 };

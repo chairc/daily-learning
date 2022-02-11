@@ -13,16 +13,19 @@ static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 		if (image_num == 0) {
 			// 三色低像素图片15x20
 			image_mat = imread("C:/Users/lenovo/Desktop/1.jpg");
-		} else {
+		} else if (image_num == 1) {
 			// 高像素图片
 			image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
+		} else if (image_num == 2) {
+			image_mat = imread("C:/Users/lenovo/Desktop/test1.jpg");
 		}
 		
 		if (image_mat.empty()) {
 			cout << "image is empty..." << endl;
+		} else {
+			namedWindow("打开图片", WINDOW_FREERATIO);
+			imshow("打开图片", image_mat);
 		}
-		namedWindow("打开图片", WINDOW_FREERATIO);
-		imshow("打开图片", image_mat);
 		switch (me) {
 			// 色彩空间转换
 			case ImageColorSpace:
@@ -72,6 +75,26 @@ static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 			// 几何图像绘制
 			case ImageDrawing:
 				qd.Drawing(image_mat);
+				break;
+			// 图像随机绘制
+			case ImageRandomDrawing:
+				qd.RandomDrawing();
+				break;
+			// 多边形绘制
+			case ImagePolylineDrawing:
+				qd.PolylineDrawing();
+				break;
+			// 鼠标绘制
+			case ImageMouseDrawing:
+				qd.MouseDrawing(image_mat);
+				break;
+			// 归一化
+			case ImageNorm:
+				qd.Norm(image_mat);
+				break;
+			// 重设大小
+			case ImageResize:
+				qd.Resize(image_mat);
 				break;
 			default:
 				break;
@@ -150,5 +173,25 @@ void Image::ImagePixelStatistic() {
 
 void Image::ImageDrawing() {
 	ImageCommonMethod(MethodEnum(11), 1);
+}
+
+void Image::ImageRandomDrawing() {
+	ImageCommonMethod(MethodEnum(12), -1);
+}
+
+void Image::ImagePolylineDrawing() {
+	ImageCommonMethod(MethodEnum(13), -1);
+}
+
+void Image::ImageMouseDrawing() {
+	ImageCommonMethod(MethodEnum(14), 1);
+}
+
+void Image::ImageNorm() {
+	ImageCommonMethod(MethodEnum(15), 1);
+}
+
+void Image::ImageResize() {
+	ImageCommonMethod(MethodEnum(16), 2);
 }
 

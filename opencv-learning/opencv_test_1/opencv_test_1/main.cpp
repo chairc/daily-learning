@@ -23,7 +23,12 @@ int main() {
 	10. image channels test \n\
 	11. image inrange test \n\
 	12. image pixel statistic test \n\
-	13. image drawing test"<< endl;
+	13. image drawing test \n\
+	14. image random drawing test \n\
+	15. image polyline drawing test \n\
+	16. image mouse drawing test \n\
+	17. image norm test \n\
+	18. image resize test"<< endl;
 		cout << "input switch number:";
 		cin >> switch_num;
 		switch (switch_num) {
@@ -79,6 +84,26 @@ int main() {
 			case 13:
 				// 几何形状绘制
 				image.ImageDrawing();
+				break;
+			case 14:
+				// 形状随机绘制
+				image.ImageRandomDrawing();
+				break;
+			case 15:
+				// 多边形绘制
+				image.ImagePolylineDrawing();
+				break;
+			case 16:
+				// 鼠标绘制
+				image.ImageMouseDrawing();
+				break;
+			case 17:
+				// 归一化
+				image.ImageNorm();
+				break;
+			case 18:
+				// 重设大小
+				image.ImageResize();
 				break;
 			case 99:
 				cout << "input camera code(default is 0):";

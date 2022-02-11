@@ -396,3 +396,141 @@ void QuickMethod::Drawing(Mat& image) {
 	imshow("叠底效果", dst);
 
 }
+
+void QuickMethod::RandomDrawing() {
+	Mat background = Mat::zeros(Size(512, 512), CV_8UC3);
+	// 产生随机数
+	RNG rng(12345);
+	int width, height;
+	width = background.cols;
+	height = background.rows;
+	while (true) {
+		int x1, x2, y1, y2, b, g, r;
+		int c = waitKey(100);
+		// 按ESC退出
+		if (c == 27) {
+			break;
+		}
+		// 随机坐标
+		x1 = rng.uniform(0, width);
+		x2 = rng.uniform(0, width);
+		y1 = rng.uniform(0, height);
+		y2 = rng.uniform(0, height);
+		b = rng.uniform(0, 255);
+		g = rng.uniform(0, 255);
+		r = rng.uniform(0, 255);
+		// 清屏
+		background = Scalar(0, 0, 0);
+		// 绘制随机线
+		line(background, Point(x1, y1), Point(x2, y2), Scalar(b, g, r), 2, 8, 0);
+		imshow("随机绘制演示", background);
+		// 休眠0.5秒
+		Sleep(500);
+	}
+}
+
+void QuickMethod::PolylineDrawing() {
+	Mat background = Mat::zeros(Size(512, 512), CV_8UC3);
+	Point p1(100, 100), p2(200, 140), p3(250, 180), p4(300, 230), p5(80, 220);
+	vector<Point> point_vector;
+	point_vector.push_back(p1);
+	point_vector.push_back(p2);
+	point_vector.push_back(p3);
+	point_vector.push_back(p4);
+	point_vector.push_back(p5);
+	// 填充多边形
+	fillPoly(background, point_vector, Scalar(255, 255, 0), LINE_AA, 0);
+	// 绘制多边形
+	polylines(background, point_vector, true, Scalar(0, 0, 255), 2, LINE_AA, 0);
+	// 填充+绘制
+	vector<vector<Point>> contours;
+	contours.push_back(point_vector);
+	// 第三个参数代表要绘制哪个多边形，-1代表全部，第五个参数正数代表轮廓，-1代表填充
+	//drawContours(background, contours, -1, Scalar(0, 255, 0), 2);
+	imshow("多边形绘制", background);
+
+}
+
+// 绘制起始和终止点
+Point mouse_on_drawing_start(-1, -1), mouse_on_drawing_end(-1,-1);
+// 临时矩阵用于擦除
+Mat mouse_on_drawing_mat;
+
+static void MouseOnDrawing(int event, int x, int y, int flag, void* user_data) {
+	int dx, dy, temp_x, temp_y;
+	Mat image = *((Mat*)user_data);
+	if (event == EVENT_LBUTTONDOWN) {
+		mouse_on_drawing_start.x = x;
+		mouse_on_drawing_start.y = y;
+		cout << "draw point start:(" << x << "," << y << ")..." << endl;
+	} else if (event == EVENT_LBUTTONUP) {
+		mouse_on_drawing_end.x = x;
+		mouse_on_drawing_end.y = y;
+		cout << "draw point end:(" << x << "," << y << ")..." << endl;
+		if ((mouse_on_drawing_end.x < mouse_on_drawing_start.x)&& (mouse_on_drawing_end.y < mouse_on_drawing_start.y)) {
+			swap(mouse_on_drawing_end.x, mouse_on_drawing_start.x);
+			swap(mouse_on_drawing_end.y, mouse_on_drawing_start.y);
+		} else if((mouse_on_drawing_end.x < mouse_on_drawing_start.x) && (mouse_on_drawing_end.y > mouse_on_drawing_start.y)) {
+			swap(mouse_on_drawing_end.x, mouse_on_drawing_start.x);
+		} else if ((mouse_on_drawing_end.x > mouse_on_drawing_start.x) && (mouse_on_drawing_end.y < mouse_on_drawing_start.y)) {
+			swap(mouse_on_drawing_end.y, mouse_on_drawing_start.y);
+		} else if ((mouse_on_drawing_end.x > mouse_on_drawing_start.x) && (mouse_on_drawing_end.y > mouse_on_drawing_start.y)) {
+			
+		}
+		dx = abs(mouse_on_drawing_end.x - mouse_on_drawing_start.x);
+		dy = abs(mouse_on_drawing_end.y - mouse_on_drawing_start.y);
+		Rect rect(mouse_on_drawing_start.x, mouse_on_drawing_start.y, dx, dy);
+		rectangle(image, rect, Scalar(0, 0, 255), 2, LINE_AA, 0);
+		imshow("鼠标绘制", image);
+		imshow("ROI区域", image(rect));
+		// 准备下一次绘制
+		mouse_on_drawing_start.x = -1;
+		mouse_on_drawing_start.y = -1;
+
+	}else if (event == EVENT_MOUSEMOVE) {
+		if (mouse_on_drawing_start.x > 0 && mouse_on_drawing_start.y > 0) {
+			mouse_on_drawing_end.x = x;
+			mouse_on_drawing_end.y = y;
+			cout << "draw point move:(" << x << "," << y << ")..." << endl;
+			dx = mouse_on_drawing_end.x - mouse_on_drawing_start.x;
+			dy = mouse_on_drawing_end.y - mouse_on_drawing_start.y;
+			Rect rect(mouse_on_drawing_start.x, mouse_on_drawing_start.y, dx, dy);
+			mouse_on_drawing_mat.copyTo(image);
+			rectangle(image, rect, Scalar(0, 0, 255), 2, LINE_AA, 0);
+			imshow("鼠标绘制", image);
+		}
+	}
+}
+
+void QuickMethod::MouseDrawing(Mat& image) {
+	namedWindow("鼠标绘制", WINDOW_FREERATIO);
+	setMouseCallback("鼠标绘制", MouseOnDrawing, (void*)(&image));
+	imshow("鼠标绘制", image);
+	mouse_on_drawing_mat = image.clone();
+}
+
+void QuickMethod::Norm(Mat& image) {
+	Mat img_float;
+	cout << "image data type: " << image.type() << endl;
+	// 转换类型 CV_8UC3变为CV_32FC3
+	image.convertTo(image, CV_32F);
+	cout << "image data type: " << image.type() << endl;
+	// NORM_MINMAX:数组的数值被平移或缩放到一个指定的范围，线性归一化。
+	normalize(image, img_float, 1.0, 0, NORM_MINMAX);
+	cout << "img_float data type: " << img_float.type() << endl;
+	namedWindow("像素归一化", WINDOW_FREERATIO);
+	imshow("像素归一化", img_float);
+}
+
+void QuickMethod::Resize(Mat& image) {
+	Mat zoom_in, zoom_out;
+	int width = image.rows, height = image.cols;
+	imshow("原图", image);
+
+	// INTER_LINEAR线性插值
+	resize(image, zoom_in, Size(width / 2, height / 2), 0, 0, INTER_LINEAR);
+	imshow("缩小", zoom_in);
+
+	resize(image, zoom_out, Size(2 * width, 2 * height), 0, 0, INTER_LINEAR);
+	imshow("放大", zoom_out);
+}
