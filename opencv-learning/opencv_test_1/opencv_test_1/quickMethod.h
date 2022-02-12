@@ -8,7 +8,6 @@ class QuickMethod {
 private:
 
 public:
-	// É«²Ê¿Õ¼ä×ª»»
 	void ColorSpace(Mat& image);
 	void MatrixCreation(Mat& image);
 	void MatrixCreation();
@@ -27,4 +26,6 @@ public:
 	void MouseDrawing(Mat& image);
 	void Norm(Mat& image);
 	void Resize(Mat& image);
+	void Flip(Mat& image);
+	void Rotate(Mat& image);
 };

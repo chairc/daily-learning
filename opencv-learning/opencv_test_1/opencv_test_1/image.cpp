@@ -96,6 +96,14 @@ static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 			case ImageResize:
 				qd.Resize(image_mat);
 				break;
+			// Í¼Æ¬·­×ª
+			case ImageFlip:
+				qd.Flip(image_mat);
+				break;
+			// Í¼Æ¬Ðý×ª
+			case ImageRotate:
+				qd.Rotate(image_mat);
+				break;
 			default:
 				break;
 		}
@@ -193,5 +201,13 @@ void Image::ImageNorm() {
 
 void Image::ImageResize() {
 	ImageCommonMethod(MethodEnum(16), 2);
+}
+
+void Image::ImageFlip() {
+	ImageCommonMethod(MethodEnum(17), 1);
+}
+
+void Image::ImageRotate() {
+	ImageCommonMethod(MethodEnum(18), 1);
 }
 

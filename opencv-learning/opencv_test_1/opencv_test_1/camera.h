@@ -6,4 +6,6 @@ private:
 
 public:
 	void OpenCamera(int camera_code);	// ´ò¿ªÉãÏñÍ·
+	void VideoOperate();
+	void VideoSave();
 };

@@ -15,8 +15,8 @@ void QuickMethod::ColorSpace(Mat& image) {
 	imshow("HSV", hsv);
 	imshow("GRAY", gray);
 	// 保存图片
-	imwrite("F:/program/opencv-learning/opencv_test_1_source_file/HSV.png", hsv);
-	imwrite("F:/program/opencv-learning/opencv_test_1_source_file/GRAY.png", gray);
+	// imwrite("F:/program/opencv-learning/opencv_test_1_source_file/HSV.png", hsv);
+	// imwrite("F:/program/opencv-learning/opencv_test_1_source_file/GRAY.png", gray);
 }
 
 void QuickMethod::MatrixCreation(Mat& image) {
@@ -533,4 +533,41 @@ void QuickMethod::Resize(Mat& image) {
 
 	resize(image, zoom_out, Size(2 * width, 2 * height), 0, 0, INTER_LINEAR);
 	imshow("放大", zoom_out);
+}
+
+void QuickMethod::Flip(Mat& image) {
+	Mat dst;
+	// 上下翻转
+	flip(image, dst, 0);
+	namedWindow("上下翻转", WINDOW_FREERATIO);
+	imshow("上下翻转", dst);
+	// 左右翻转
+	flip(image, dst, 1);
+	namedWindow("左右翻转", WINDOW_FREERATIO);
+	imshow("左右翻转", dst);
+	// 左右 + 上下翻转
+	flip(image, dst, -1);
+	namedWindow("上下左右翻转", WINDOW_FREERATIO);
+	imshow("上下左右翻转", dst);
+}
+
+void QuickMethod::Rotate(Mat& image) {
+	Mat dst, M;
+	double cos, sin;
+	int new_width, new_height;
+	int width = image.rows, height = image.cols;
+	// 第一个参数表示原始图像的中心位置，第二个参数表示旋转角度，第三个参数表示图像是否放缩
+	M = getRotationMatrix2D(Point2f(width / 2, height / 2), 45, 1.0);
+	// 获取M中第一行一列和一行二列的值
+	cos = abs(M.at<double>(0, 0));
+	sin = abs(M.at<double>(0, 1));
+	// 计算新的高和宽
+	new_width = cos * width + sin * height;
+	new_height = sin * width + cos * height;
+	// 计算新中心坐标
+	M.at<double>(0, 2) = M.at<double>(0, 2) + (new_width / 2 - width / 2);
+	M.at<double>(1, 2) = M.at<double>(1, 2) + (new_height / 2 - height / 2);
+	warpAffine(image, dst, M, Size(new_width, new_height), INTER_LINEAR, 0, Scalar(255, 0, 0));
+	namedWindow("图像旋转", WINDOW_FREERATIO);
+	imshow("图像旋转", dst);
 }

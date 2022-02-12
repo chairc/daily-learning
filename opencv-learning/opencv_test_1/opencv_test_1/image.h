@@ -18,6 +18,8 @@ enum MethodEnum {
 	ImageMouseDrawing,
 	ImageNorm,
 	ImageResize,
+	ImageFlip,
+	ImageRotate,
 };
 
 static void ImageCommonMethod(MethodEnum type);
@@ -44,4 +46,6 @@ public:
 	void ImageMouseDrawing();
 	void ImageNorm();
 	void ImageResize();
+	void ImageFlip();
+	void ImageRotate();
 };

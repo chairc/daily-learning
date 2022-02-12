@@ -3,13 +3,41 @@
 #include "image.h"
 
 using namespace std;
+void ImageTest();
+void CameraTest();
 
 int main() {
-	Camera camera;
-	Image image;
-	int camera_code, image_type, switch_num, flag = 1;
-	string;
+	int flag = 1, switch_num;
 	while (flag == 1) {
+		cout << "select your test.\n\
+	1. image test \n\
+	2. camera test \n\
+	0.  exit" << endl;
+		cout << "input switch number:";
+		cin >> switch_num;
+		switch (switch_num) {
+			case 1:
+				ImageTest();
+				break;
+			case 2:
+				CameraTest();
+				break;
+			case 0:
+				flag = 0;
+				break;
+			default:
+				break;
+		}
+		
+	}
+	
+	return 0;
+}
+
+void ImageTest() {
+	Image image;
+	int image_flag = 1, image_type,image_switch_num;
+	while (image_flag == 1) {
 		cout << "select your test.\n\
 	1.  open image test\n\
 	2.  image color space test\n\
@@ -28,10 +56,13 @@ int main() {
 	15. image polyline drawing test \n\
 	16. image mouse drawing test \n\
 	17. image norm test \n\
-	18. image resize test"<< endl;
-		cout << "input switch number:";
-		cin >> switch_num;
-		switch (switch_num) {
+	18. image resize test \n\
+	19. image flip test \n\
+	20. image rotate test \n\
+	0.  exit" << endl;
+		cout << "input image switch number:";
+		cin >> image_switch_num;
+		switch (image_switch_num) {
 			case 1:
 				cout << "input image type(color = 0, gray = 1):";
 				cin >> image_type;
@@ -105,15 +136,49 @@ int main() {
 				// 重设大小
 				image.ImageResize();
 				break;
-			case 99:
+			case 19:
+				// 图片翻转
+				image.ImageFlip();
+				break;
+			case 20:
+				// 图片旋转
+				image.ImageRotate();
+				break;
+			default:
+				image_flag = 0;
+				break;
+		}
+	}
+}
+
+void CameraTest() {
+	Camera camera;
+	int camera_flag = 1,camera_code = 0,camera_switch_num;
+	while (camera_flag == 1) {
+		cout << "select your test.\n\
+	1. open camera test \n\
+	2. video operate test \n\
+	3. video save test \n\
+	0.  exit" << endl;
+		cout << "input camera switch number:";
+		cin >> camera_switch_num;
+		switch (camera_switch_num) {
+			case 1:
 				cout << "input camera code(default is 0):";
 				cin >> camera_code;
 				camera.OpenCamera(camera_code);
 				break;
+			case 2:
+				camera.VideoOperate();
+				break;
+			case 3:
+				camera.VideoSave();
+				break;
+			case 0:
+				camera_flag = 0;
+				break;
 			default:
-				flag = 0;
 				break;
 		}
 	}
-	return 0;
 }
