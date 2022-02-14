@@ -571,3 +571,70 @@ void QuickMethod::Rotate(Mat& image) {
 	namedWindow("图像旋转", WINDOW_FREERATIO);
 	imshow("图像旋转", dst);
 }
+
+void QuickMethod::Histogram(Mat& image) {
+	// 通道分离
+	vector<Mat> bgr_channel;
+	split(image, bgr_channel);
+	const int channels[1] = { 0 };
+	const int bins[1] = { 256 };
+	float hranges[2] = { 0,256 };
+	const float* ranges[1] = { hranges };
+	int hist_width, hist_height, bin_width;
+	Mat b_hist, g_hist, r_hist, hist_image;
+	// 计算BGR通道直方图
+	calcHist(&bgr_channel[0], 1, 0, Mat(), b_hist, 1, bins, ranges);
+	calcHist(&bgr_channel[1], 1, 0, Mat(), g_hist, 1, bins, ranges);
+	calcHist(&bgr_channel[2], 1, 0, Mat(), r_hist, 1, bins, ranges);
+	// 显示直方图
+	hist_width = 512;
+	hist_height = 400;
+	bin_width = cvRound((double)hist_width / bins[0]);
+	hist_image = Mat::zeros(hist_height, hist_width, CV_8UC3);
+	// 归一化直方图数据
+	normalize(b_hist, b_hist, 0, hist_image.rows, NORM_MINMAX, -1, Mat());
+	normalize(g_hist, g_hist, 0, hist_image.rows, NORM_MINMAX, -1, Mat());
+	normalize(r_hist, r_hist, 0, hist_image.rows, NORM_MINMAX, -1, Mat());
+	// 绘制直方图曲线
+	for (int i = 1; i < bins[0]; i++) {
+		line(hist_image, Point(bin_width * (i - 1), hist_height - cvRound(b_hist.at<float>(i - 1))),
+			Point(bin_width * (i), hist_height - cvRound(b_hist.at<float>(i))), Scalar(255, 0, 0), 2, 8, 0);
+		line(hist_image, Point(bin_width * (i - 1), hist_height - cvRound(g_hist.at<float>(i - 1))),
+			Point(bin_width * (i), hist_height - cvRound(g_hist.at<float>(i))), Scalar(0, 255, 0), 2, 8, 0);
+		line(hist_image, Point(bin_width * (i - 1), hist_height - cvRound(r_hist.at<float>(i - 1))),
+			Point(bin_width * (i), hist_height - cvRound(r_hist.at<float>(i))), Scalar(0, 0, 255), 2, 8, 0);
+	}
+	// 显示直方图
+	namedWindow("显示直方图", WINDOW_FREERATIO);
+	imshow("显示直方图", hist_image);
+}
+
+void QuickMethod::Histogram2D(Mat& image) {
+	Mat hsv, hs_hist;
+	cvtColor(image, hsv, COLOR_BGR2HSV);
+	int h_bins = 30, s_bins = 32,scale = 10;
+	double max_val = 0;
+	int hist_bins[] = { h_bins,s_bins };
+	// 于H平面范围为180，对于S平面范围为256
+	float h_range[] = { 0,180 };
+	float s_range[] = { 0,256 };
+	const float* hs_ranges[] = { h_range,s_range };
+	// 处理H和S通道
+	int hs_channels[] = { 0,1 };
+	calcHist(&hsv, 1, hs_channels, Mat(), hs_hist, 2, hist_bins, hs_ranges, true, false);
+	// 找到全局最小值和全局最大值
+	minMaxLoc(hs_hist, 0, &max_val, 0, 0);
+	Mat hist_2d_image = Mat::zeros(s_bins * scale, h_bins * scale, CV_8UC3);
+	for (int h = 0; h < h_bins; h++) {
+		for (int s = 0; s < s_bins; s++) {
+			float bin_val = hs_hist.at<float>(h, s);
+			int intensity = cvRound(bin_val * 255 / max_val);
+			rectangle(hist_2d_image, Point(h * scale, s * scale), 
+				Point((h + 1) * scale - 1, (s + 1) * scale - 1), 
+				Scalar::all(intensity), -1);
+		}
+	}
+	applyColorMap(hist_2d_image, hist_2d_image, COLORMAP_JET);
+	namedWindow("2D直方图", WINDOW_FREERATIO);
+	imshow("2D直方图", hist_2d_image);
+}

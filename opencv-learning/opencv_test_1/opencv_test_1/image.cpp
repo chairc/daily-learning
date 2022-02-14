@@ -18,6 +18,9 @@ static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 			image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg"); // B,G,R
 		} else if (image_num == 2) {
 			image_mat = imread("C:/Users/lenovo/Desktop/test1.jpg");
+			// 灰度图
+		} else if (image_num == 3) {
+			image_mat = imread("C:/Users/lenovo/Desktop/head_index.jpg", IMREAD_GRAYSCALE);
 		}
 		
 		if (image_mat.empty()) {
@@ -103,6 +106,13 @@ static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 			// 图片旋转
 			case ImageRotate:
 				qd.Rotate(image_mat);
+				break;
+			// 直方图
+			case ImageHistogram:
+				qd.Histogram(image_mat);
+				break;
+			case ImageHistogram2D:
+				qd.Histogram2D(image_mat);
 				break;
 			default:
 				break;
@@ -209,5 +219,13 @@ void Image::ImageFlip() {
 
 void Image::ImageRotate() {
 	ImageCommonMethod(MethodEnum(18), 1);
+}
+
+void Image::ImageHistogram() {
+	ImageCommonMethod(MethodEnum(19), 1);
+}
+
+void Image::ImageHistogram2D() {
+	ImageCommonMethod(MethodEnum(20), 1);
 }
 

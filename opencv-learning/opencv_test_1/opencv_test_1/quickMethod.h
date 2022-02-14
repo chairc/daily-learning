@@ -28,4 +28,6 @@ public:
 	void Resize(Mat& image);
 	void Flip(Mat& image);
 	void Rotate(Mat& image);
+	void Histogram(Mat& image);
+	void Histogram2D(Mat& image);
 };

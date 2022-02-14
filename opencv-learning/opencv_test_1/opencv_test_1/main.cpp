@@ -59,6 +59,8 @@ void ImageTest() {
 	18. image resize test \n\
 	19. image flip test \n\
 	20. image rotate test \n\
+	21. image histogram test \n\
+	22. image histogram 2d test \n\
 	0.  exit" << endl;
 		cout << "input image switch number:";
 		cin >> image_switch_num;
@@ -143,6 +145,14 @@ void ImageTest() {
 			case 20:
 				// 图片旋转
 				image.ImageRotate();
+				break;
+			case 21:
+				// 直方图
+				image.ImageHistogram();
+				break;
+			case 22:
+				// 2d直方图
+				image.ImageHistogram2D();
 				break;
 			default:
 				image_flag = 0;

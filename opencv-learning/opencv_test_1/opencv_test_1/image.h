@@ -20,6 +20,9 @@ enum MethodEnum {
 	ImageResize,
 	ImageFlip,
 	ImageRotate,
+	ImageHistogram,
+	ImageHistogram2D,
+
 };
 
 static void ImageCommonMethod(MethodEnum type);
@@ -48,4 +51,6 @@ public:
 	void ImageResize();
 	void ImageFlip();
 	void ImageRotate();
+	void ImageHistogram();
+	void ImageHistogram2D();
 };
