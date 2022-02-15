@@ -1,6 +1,7 @@
 #include "quickMethod.h"
 #include <iostream>
 #include <vector>
+#include <opencv2/dnn.hpp>
 
 using namespace std;
 
@@ -637,4 +638,62 @@ void QuickMethod::Histogram2D(Mat& image) {
 	applyColorMap(hist_2d_image, hist_2d_image, COLORMAP_JET);
 	namedWindow("2D直方图", WINDOW_FREERATIO);
 	imshow("2D直方图", hist_2d_image);
+}
+
+void QuickMethod::HistogramEqual(Mat& image) {
+	Mat dst;
+	equalizeHist(image, dst);
+	namedWindow("直方图均衡化", WINDOW_FREERATIO);
+	imshow("直方图均衡化", dst);
+}
+
+void QuickMethod::Blur(Mat& image) {
+	Mat dst;
+	blur(image, dst, Size(13, 13), Point(-1, -1));
+	namedWindow("图像模糊", WINDOW_FREERATIO);
+	imshow("图像模糊", dst);
+}
+
+void QuickMethod::GaussianBlur(Mat& image) {
+	Mat dst;
+	cv::GaussianBlur(image, dst, Size(13, 13), 15);
+	namedWindow("高斯模糊", WINDOW_FREERATIO);
+	imshow("高斯模糊", dst);
+	
+}
+
+dnn::Net QuickMethod::LoadNet() {
+	// 路径信息
+	string dir = "F:/program/opencv-learning/opencv_test_1_source_file/";
+	// 获取网络文件
+	dnn::Net net = dnn::readNetFromTensorflow(dir + "opencv_face_detector_uint8.pb", dir + "opencv_face_detector.pbtxt");
+	return net;
+}
+
+void QuickMethod::FaceDetection(Mat& image, dnn::Net net) {
+	Mat blob, prob;
+	float confidence;
+	int x1, y1, x2, y2, width, height;
+	blob = dnn::blobFromImage(image, 1.0, Size(300, 300), Scalar(104, 177, 123), false, false);
+	net.setInput(blob);
+	
+	// 完成推理，返回NCHW
+	prob = net.forward();
+	Mat detection_result(prob.size[2], prob.size[3], CV_32F, prob.ptr<float>());
+	// 解析结果
+	for (int i = 0; i < detection_result.rows; i++) {
+		// 置信度，置信度越高越可能是人脸
+		confidence = detection_result.at<float>(i, 2);
+		if (confidence > 0.5) {
+			x1 = static_cast<int>(detection_result.at<float>(i, 3) * image.cols);
+			y1 = static_cast<int>(detection_result.at<float>(i, 4) * image.rows);
+			x2 = static_cast<int>(detection_result.at<float>(i, 5) * image.cols);
+			y2 = static_cast<int>(detection_result.at<float>(i, 6) * image.rows);
+			width = x2 - x1;
+			height = y2 - y1;
+			Rect rect(x1, y1, width, height);
+			rectangle(image, rect, Scalar(255, 255, 0), 1, LINE_AA, 0);
+		}
+	}
+	imshow("人脸检测", image);
 }

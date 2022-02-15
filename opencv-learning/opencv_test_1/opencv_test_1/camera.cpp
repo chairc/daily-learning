@@ -1,13 +1,7 @@
 #include "camera.h"
 #include "quickMethod.h"
-#include <iostream>
-#include <conio.h>
-#include <opencv2/highgui/highgui.hpp>  
-#include <opencv2/imgproc/imgproc.hpp>  
-#include <opencv2/core/core.hpp>
 
 using namespace std;
-using namespace cv;
 
 void Camera::OpenCamera(int camera_code) {
 	try {
@@ -15,6 +9,14 @@ void Camera::OpenCamera(int camera_code) {
 		VideoCapture cap(camera_code);
 		QuickMethod qm;
 		Mat frame;
+		int frame_width, frame_height;
+		double fps;
+		frame_width = cap.get(CAP_PROP_FRAME_WIDTH);
+		frame_height = cap.get(CAP_PROP_FRAME_HEIGHT);
+		fps = cap.get(CAP_PROP_FPS);
+		cout << "frame width: " << frame_width << endl;
+		cout << "frame height: " << frame_height << endl;
+		cout << "frame fps: " << fps << endl;
 		namedWindow("调用摄像头", WINDOW_FREERATIO);
 		if (!cap.isOpened()) {
 			cout << "camera is not opened." << endl;
@@ -115,6 +117,48 @@ void Camera::VideoSave() {
 		}
 		cap.release();
 		writer.release();
+	} catch (const std::exception&) {
+		cout << "error" << endl;
+	}
+}
+
+void Camera::VideoFaceDetection() {
+	try {
+		// 调用camera_code号摄像头
+		VideoCapture cap(0);
+		QuickMethod qm;
+		Mat frame;
+		int frame_width, frame_height;
+		double fps;
+		frame_width = cap.get(CAP_PROP_FRAME_WIDTH);
+		frame_height = cap.get(CAP_PROP_FRAME_HEIGHT);
+		fps = cap.get(CAP_PROP_FPS);
+		cout << "frame width: " << frame_width << endl;
+		cout << "frame height: " << frame_height << endl;
+		cout << "frame fps: " << fps << endl;
+		namedWindow("调用摄像头", WINDOW_FREERATIO);
+		if (!cap.isOpened()) {
+			cout << "camera is not opened." << endl;
+		} else {
+			dnn::Net net = qm.LoadNet();
+			while (true) {
+				//cap >> frame;
+				cap.read(frame);
+				flip(frame, frame, 1);
+				if (frame.empty()) {
+					break;
+				}
+				imshow("调用摄像头", frame);
+				// 可以做图像处理
+				qm.FaceDetection(frame, net);
+				int c = waitKey(1);
+				// 按ESC退出
+				if (c == 27) {
+					break;
+				}
+			}
+		}
+		cap.release();
 	} catch (const std::exception&) {
 		cout << "error" << endl;
 	}

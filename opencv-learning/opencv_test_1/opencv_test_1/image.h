@@ -1,5 +1,4 @@
 #pragma once
-
 enum MethodEnum {
 	ImageColorSpace,
 	ImageMatrixCreation,
@@ -22,7 +21,10 @@ enum MethodEnum {
 	ImageRotate,
 	ImageHistogram,
 	ImageHistogram2D,
-
+	ImageHistogramEqual,
+	ImageBlur,
+	ImageGaussianBlur,
+	ImageFaceDetection,
 };
 
 static void ImageCommonMethod(MethodEnum type);
@@ -53,4 +55,8 @@ public:
 	void ImageRotate();
 	void ImageHistogram();
 	void ImageHistogram2D();
+	void ImageHistogramEqual();
+	void ImageBlur();
+	void ImageGaussianBlur();
+	void ImageFaceDetection();
 };

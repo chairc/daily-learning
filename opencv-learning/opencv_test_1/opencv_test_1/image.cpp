@@ -1,10 +1,10 @@
 #include "image.h"
 #include "quickMethod.h"
 #include <opencv2/opencv.hpp>
+#include <opencv2/dnn.hpp>
 #include <iostream>
 
 using namespace std;
-using namespace cv;
 
 static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 	try {
@@ -111,8 +111,25 @@ static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 			case ImageHistogram:
 				qd.Histogram(image_mat);
 				break;
+			// 2D直方图
 			case ImageHistogram2D:
 				qd.Histogram2D(image_mat);
+				break;
+			// 直方图均值化
+			case ImageHistogramEqual:
+				qd.HistogramEqual(image_mat);
+				break;
+			// 图像模糊
+			case ImageBlur:
+				qd.Blur(image_mat);
+				break;
+			// 高斯模糊
+			case ImageGaussianBlur:
+				qd.GaussianBlur(image_mat);
+				break;
+			// 照片人脸检测
+			case ImageFaceDetection:
+				qd.FaceDetection(image_mat, qd.LoadNet());
 				break;
 			default:
 				break;
@@ -227,5 +244,20 @@ void Image::ImageHistogram() {
 
 void Image::ImageHistogram2D() {
 	ImageCommonMethod(MethodEnum(20), 1);
+}
+
+void Image::ImageHistogramEqual() {
+	ImageCommonMethod(MethodEnum(21), 3);
+}
+
+void Image::ImageBlur() {
+	ImageCommonMethod(MethodEnum(22), 1);
+}
+
+void Image::ImageGaussianBlur() {
+	ImageCommonMethod(MethodEnum(23), 1);
+}
+
+void Image::ImageFaceDetection() {
 }
 

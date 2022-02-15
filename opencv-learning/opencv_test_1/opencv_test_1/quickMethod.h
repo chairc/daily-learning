@@ -1,7 +1,11 @@
 #pragma once
+#include <iostream>
+#include <vector>
 #include <opencv2/opencv.hpp>
+#include <opencv2/dnn.hpp>
 #include <Windows.h>
 
+using namespace std;
 using namespace cv;
 
 class QuickMethod {
@@ -30,4 +34,9 @@ public:
 	void Rotate(Mat& image);
 	void Histogram(Mat& image);
 	void Histogram2D(Mat& image);
+	void HistogramEqual(Mat& image);
+	void Blur(Mat& image);
+	void GaussianBlur(Mat& image);
+	dnn::Net LoadNet();
+	void FaceDetection(Mat& image, dnn::Net net);
 };

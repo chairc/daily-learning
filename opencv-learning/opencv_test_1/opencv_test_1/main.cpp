@@ -61,6 +61,10 @@ void ImageTest() {
 	20. image rotate test \n\
 	21. image histogram test \n\
 	22. image histogram 2d test \n\
+	23. image histogram equal test \n\
+	24. image blur test \n\
+	25. image gaussian blur test \n\
+	26. image face detection test \n\
 	0.  exit" << endl;
 		cout << "input image switch number:";
 		cin >> image_switch_num;
@@ -154,6 +158,22 @@ void ImageTest() {
 				// 2d直方图
 				image.ImageHistogram2D();
 				break;
+			case 23:
+				// 直方图均衡化
+				image.ImageHistogramEqual();
+				break;
+			case 24:
+				// 图像模糊
+				image.ImageBlur();
+				break;
+			case 25:
+				// 高斯模糊
+				image.ImageGaussianBlur();
+				break;
+			case 26:
+				// 人脸检测
+				image.ImageFaceDetection();
+				break;
 			default:
 				image_flag = 0;
 				break;
@@ -169,6 +189,7 @@ void CameraTest() {
 	1. open camera test \n\
 	2. video operate test \n\
 	3. video save test \n\
+	4. video face detection test \n\
 	0.  exit" << endl;
 		cout << "input camera switch number:";
 		cin >> camera_switch_num;
@@ -183,6 +204,9 @@ void CameraTest() {
 				break;
 			case 3:
 				camera.VideoSave();
+				break;
+			case 4:
+				camera.VideoFaceDetection();
 				break;
 			case 0:
 				camera_flag = 0;
