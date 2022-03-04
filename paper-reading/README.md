@@ -11,7 +11,7 @@
 |  7   | **YOLO9000: Better, Faster, Stronger**                       | YOLO        |                                                              |  ❌   |  ❌   |
 |  8   | **YOLOv3: An Incremental Improvement**                       | YOLO        | [🎫](https://github.com/chairc/daily-learning/tree/main/paper-reading/YOLO/YOLOv3) |  ✔   |  ✔   |
 |  9   | **YOLOv4: Optimal Speed and Accuracy of Object Detection**   | YOLO        | [🎫](https://github.com/chairc/daily-learning/tree/main/paper-reading/YOLO/YOLOv4) |  ✔   |  ✔   |
-|  10  | **YOLOX: Exceeding YOLO Series in 2021**                     | YOLO        |                                                              |  ❌   |  ❌   |
+|  10  | **YOLOX: Exceeding YOLO Series in 2021**                     | YOLO        | [🎫](https://github.com/chairc/daily-learning/tree/main/paper-reading/YOLO/YOLOX) |  ✔   |  ✔   |
 |  11  | **An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale** | Transformer |                                                              |  ❌   |  ❌   |
 |  12  | **Swin Transformer: Hierarchical Vision Transformer using Shifted Windows** | Transformer |                                                              |  ❌   |  ❌   |
 
