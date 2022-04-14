@@ -15,6 +15,10 @@
 |  11  | **An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale** | Transformer |                                                              |  ❌   |  ❌   |
 |  12  | **Swin Transformer: Hierarchical Vision Transformer using Shifted Windows** | Transformer |                                                              |  ❌   |  ❌   |
 |  13  | **A ConvNet for the 2020s**                                  | CNN         |                                                              |  ✔   |  ❌   |
+|  14  | **ECA-Net: Effificient Channel Attention for Deep Convolutional Neural Networks** | Attention   |                                                              |  ✔   |  ❌   |
+|  15  | **Learning Spatial Fusion for Single-Shot Object Detection** |             |                                                              |  ❌   |  ❌   |
+
+
 
 
 
