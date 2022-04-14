@@ -667,6 +667,8 @@ dnn::Net QuickMethod::LoadNet() {
 	string dir = "F:/program/opencv-learning/opencv_test_1_source_file/";
 	// 获取网络文件
 	dnn::Net net = dnn::readNetFromTensorflow(dir + "opencv_face_detector_uint8.pb", dir + "opencv_face_detector.pbtxt");
+	net.setPreferableBackend(dnn::DNN_BACKEND_CUDA);
+	net.setPreferableTarget(dnn::DNN_TARGET_CUDA);
 	return net;
 }
 

@@ -39,6 +39,7 @@ void Camera::OpenCamera(int camera_code) {
 			}
 		}
 		cap.release();
+		destroyAllWindows();
 	} catch (const std::exception&) {
 		cout << "error" << endl;
 	}
@@ -76,6 +77,7 @@ void Camera::VideoOperate() {
 			}
 		}
 		cap.release();
+		destroyAllWindows();
 	} catch (const std::exception&) {
 		cout << "error" << endl;
 	}
@@ -159,6 +161,7 @@ void Camera::VideoFaceDetection() {
 			}
 		}
 		cap.release();
+		destroyAllWindows();
 	} catch (const std::exception&) {
 		cout << "error" << endl;
 	}

@@ -146,12 +146,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="quickMethod.cpp" />
+    <ClCompile Include="yolox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="quickMethod.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="yolox.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="opencv_test_1.rc" />

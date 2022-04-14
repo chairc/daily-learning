@@ -135,6 +135,7 @@ static void ImageCommonMethod(enum MethodEnum me,int image_num = 0) {
 				break;
 		}
 		waitKey(0);
+		destroyAllWindows();
 	} catch (const std::exception& e) {
 		cout << e.what() << endl;
 	}
@@ -156,6 +157,7 @@ void Image::OpenImage(int image_type) {
 		namedWindow("打开图片", WINDOW_FREERATIO);
 		imshow("打开图片", image_mat);
 		waitKey(0);
+		destroyAllWindows();
 	} catch (const std::exception&) {
 		cout << "error" << endl;
 	}
