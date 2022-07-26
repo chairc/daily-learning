@@ -35,7 +35,7 @@ sudo reboot
 nvidia-smi
 ```
 
-![](/home/chairc/typora/How_to_install_NVIDIA_drivers_and_CUDA_CUDNN_in_ubuntu2210/img/1.png)
+![](./img/1.png)
 
 ### 安装CUDA 11.7
 
@@ -63,7 +63,7 @@ sudo apt-get install linux-headers-$(uname -r)
 
 NVIDIA CUDA工具下载网站：[https://developer.nvidia.com/cuda-downloads](https://developer.nvidia.com/cuda-downloads)
 
-![](/home/chairc/typora/How_to_install_NVIDIA_drivers_and_CUDA_CUDNN_in_ubuntu2210/img/2.png)
+![](./img/2.png)
 
 使用以下命令删除过时的签名的密钥：
 
@@ -126,11 +126,13 @@ export LD_CUDA_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_CUDA_LIBRARY_PATH:+:$
 nvcc -V
 ```
 
-![](/home/chairc/typora/How_to_install_NVIDIA_drivers_and_CUDA_CUDNN_in_ubuntu2210/img/3.png)
+![](./img/3.png)
 
 ### 安装cuDNN 8.4
 
 由于官方需要注册账号下载，下载地址：https://developer.nvidia.com/rdp/cudnn-download
+
+![](./img/4.png)
 
 下载完成后进入你的cuDNN路径中，解压CUDNN文件
 
